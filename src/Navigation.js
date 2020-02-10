@@ -9,12 +9,22 @@ import HomeScreen from './screens/tabs/HomeScreen';
 import ScreenOne from './screens/tabs/ScreenOne';
 import ScreenTwo from './screens/tabs/ScreenTwo';
 import SignupScreen from './screens/auth/SignupScreen';
+import {createDrawerNavigator} from 'react-navigation-drawer';
 
 const tab_icon_home = require('./assets/bottom_tabs/tab_icon_home.png');
 
-const App = createBottomTabNavigator({
-    StackOne: {
+const SideBarNavigation = createDrawerNavigator({
+    HomeScreen:{
         screen: HomeScreen,
+    },
+    ScreenOne:ScreenOne,
+    ScreenTwo:ScreenTwo,
+});
+
+
+const App = createBottomTabNavigator({
+    HomeScreen: {
+        screen: SideBarNavigation,
         navigationOptions: {
             tabBarLabel: 'Home',
             tabBarIcon: ({focused}) => (
@@ -30,7 +40,7 @@ const App = createBottomTabNavigator({
     ScreenOne: {
         screen: ScreenOne,
         navigationOptions: {
-            tabBarLabel: 'StackTwo',
+            tabBarLabel: 'Screen One',
             tabBarIcon: ({focused}) => (
                 <Image
                     source={tab_icon_home}
@@ -41,10 +51,10 @@ const App = createBottomTabNavigator({
             inactiveTintColor: '#303030',
         },
     },
-    ProfileStack: {
+    ScreenTwo: {
         screen: ScreenTwo,
         navigationOptions: {
-            tabBarLabel: 'Profile',
+            tabBarLabel: 'Screen Two',
             tabBarIcon: ({focused}) => (
                 <Image
                     source={tab_icon_home}
@@ -71,6 +81,7 @@ const Auth = createStackNavigator({
     },
     initialRouteName: 'LoginScreen',
 });
+
 
 console.disableYellowBox = true;
 

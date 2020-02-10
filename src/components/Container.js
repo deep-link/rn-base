@@ -40,6 +40,18 @@ class Container extends Component {
         }
     }
 
+    onPressSideBarRight() {
+        if (this.props.onPressSideBarRight) {
+            this.props.onPressSideBarRight();
+        }
+    }
+
+    onPressSideBarLeft() {
+        if (this.props.onPressSideBarLeft) {
+            this.props.onPressSideBarLeft();
+        }
+    }
+
     onRefresh() {
         if (this.props.onRefresh) {
             this.props.onRefresh();
@@ -56,6 +68,8 @@ class Container extends Component {
                             loading={this.props.loading}
                             onPressBack={this.props.onPressBack ? () => this.onPressBack() : false}
                             onPressNext={this.props.onPressNext ? () => this.onPressNext() : false}
+                            onPressSideBarRight={this.props.onPressSideBarRight ? () => this.onPressSideBarRight() : false}
+                            onPressSideBarLeft={this.props.onPressSideBarLeft ? () => this.onPressSideBarLeft() : false}
                         />
                         {this.props.loading ? (
                             <View style={styles.container}>

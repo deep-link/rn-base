@@ -16,7 +16,9 @@ class HomeScreen extends Component {
     render() {
         return (
             <Container
-                onPressBack={()=>{}}
+                onPressSideBarRight={() => {
+                    this.props.navigation.toggleDrawer();
+                }}
                 title={'Home Screen'}
                 loading={false}>
                 <Text>HomeScreen</Text>

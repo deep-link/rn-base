@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const styles = StyleSheet.create({
     container: {
@@ -47,25 +48,61 @@ class NavigationBar extends Component {
         if (this.props.title || this.props.onPressBack || this.props.onPressNext) {
             return (
                 <View style={styles.container}>
-                    {this.props.onPressBack ? (
-                        <TouchableOpacity onPress={() => this.onPressBack()} style={styles.navigationIconContainerL}>
-                            <Icon name="ios-arrow-back" size={30}/>
-                        </TouchableOpacity>
-                    ) : null}
+                    {this.renderRightButton()}
                     <View style={styles.titleContainer}>
-                        <Text>{this.props.loading ? "Loading..." : this.props.title ? this.props.title : null} </Text>
+                        <Text>{this.props.loading ? 'Loading...' : this.props.title ? this.props.title : null} </Text>
                     </View>
-                    {this.props.onPressNext ? (
-                        <TouchableOpacity onPress={() => this.onPressNext()} style={styles.navigationIconContainerR}>
-                            <Icon name="ios-arrow-forward" size={30}/>
-                        </TouchableOpacity>
-                    ) : null}
+                    {this.renderLeftButton()}
                 </View>
             );
         } else {
             return null;
         }
 
+    }
+
+    renderRightButton() {
+        if (this.props.onPressBack !== false) {
+            return (
+                <TouchableOpacity onPress={() => this.onPressBack()} style={styles.navigationIconContainerL}>
+                    <Icon name="ios-arrow-back" size={30}/>
+                </TouchableOpacity>
+            );
+        } else if (this.props.onPressSideBarRight !== false) {
+            return (
+                <TouchableOpacity onPress={() => this.onPressSideBarRight()} style={styles.navigationIconContainerL}>
+                    <Entypo name="menu" size={30}/>
+                </TouchableOpacity>
+            );
+        }
+    }
+
+    renderLeftButton() {
+        if (this.props.onPressNext !== false) {
+            return (
+                <TouchableOpacity onPress={() => this.onPressNext()} style={styles.navigationIconContainerR}>
+                    <Icon name="ios-arrow-forward" size={30}/>
+                </TouchableOpacity>
+            );
+        } else if (this.props.onPressSideBarLeft !== false) {
+            return (
+                <TouchableOpacity onPress={() => this.onPressSideBarRight()} style={styles.navigationIconContainerR}>
+                    <Entypo name="menu" size={30}/>
+                </TouchableOpacity>
+            );
+        }
+    }
+
+    onPressSideBarLeft() {
+        if (this.props.onPressSideBarLeft) {
+            this.props.onPressSideBarLeft();
+        }
+    }
+
+    onPressSideBarRight() {
+        if (this.props.onPressSideBarRight) {
+            this.props.onPressSideBarRight();
+        }
     }
 }
 
