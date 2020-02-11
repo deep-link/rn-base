@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Container from '../../components/Container';
 import {bindActionCreators} from 'redux';
 import {getAuthToken} from '../../store';
 import {connect} from 'react-redux';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 const styles = StyleSheet.create({});
 
@@ -21,7 +23,23 @@ class HomeScreen extends Component {
                 }}
                 title={'Home Screen'}
                 loading={false}>
-                <Text>HomeScreen</Text>
+                <Input
+                    onChangeText={(text) => {
+                        console.log(text);
+                    }}
+                    value={'hiiii'}
+                    errors={[
+                        'this is a error'
+                    ]}
+                />
+
+
+                <Button
+                title={"this is a button"}
+                onPress={()=>{
+                    console.log('here')
+                }}
+                />
             </Container>
         );
     }
